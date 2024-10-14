@@ -1,29 +1,45 @@
 
+import os
+import json
+from datetime import datetime
+#==================NANI===================
 from playersData import pdata
 import ba, setting, _ba
 from stats import mystats
+from shop.Shop import get_player_tag_from_bank
 sett = setting.get_settings_data()
-def addtag(node,player):
-    session_player=player.sessionplayer
-    account_id=session_player.get_v1_account_id()
-    customtag_=pdata.get_custom()
-    customtag=customtag_['customtag']
-    roles=pdata.get_roles()
-    p_roles=pdata.get_player_roles(account_id)
-    tag=None
-    col=(0.5,0.5,1) # default color for custom tags
+
+
+def addtag(node, player):
+    session_player = player.sessionplayer
+    account_id = session_player.get_v1_account_id()
+
+    # Get custom tags
+    customtag_ = pdata.get_custom()
+    customtag = customtag_['customtag']
+
+    # Get roles and player roles
+    roles = pdata.get_roles()
+    p_roles = pdata.get_player_roles(account_id)
+
+    tag = None
+    col = (0.5, 0.5, 1)  # Default color for custom tags
+
+    # Check for custom tag
     if account_id in customtag:
-        tag=customtag[account_id]
-    elif p_roles !=[]:
+        tag = customtag[account_id]
+
+    if p_roles:
         for role in roles:
-
             if role in p_roles:
-                tag=roles[role]['tag']
-                col=roles[role]['tagcolor']
-                break;
-    if tag:
-        Tag(node,tag,col)
+                tag = roles[role]['tag']
+                col = roles[role]['tagcolor']
+                
+    # Use the function to check if the player has a tag from bank.json
+    tag, col = get_player_tag_from_bank(account_id)
 
+    if tag:
+        Tag(node, tag, col)
 
 def addrank(node,player):
     session_player=player.sessionplayer
@@ -106,11 +122,15 @@ class Rank(object):
                                })
         self.node.connectattr('torso_position', mnode, 'input2')
         if (rank == 1):
-            rank = '\ue01f' + "#"+str(rank) +'\ue01f'
+            rank = '\ue043' + "#"+str(rank) + '\ue043'
         elif (rank ==2):
-            rank = '\ue01f' + "#"+str(rank) +'\ue01f'
+            rank = '\ue048' + "#"+str(rank) + '\ue048'
         elif (rank ==3):
             rank = '\ue01f' + "#"+str(rank) +'\ue01f'
+        elif (rank ==4):
+            rank = '\ue047' + "#"+str(rank) +'\ue047'
+        elif (rank ==5):
+            rank = '\ue046' + "#"+str(rank) +'\ue046'
         else:
             rank = "#"+str(rank)
 

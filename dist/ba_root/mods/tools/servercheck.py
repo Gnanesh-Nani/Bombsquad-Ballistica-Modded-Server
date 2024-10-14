@@ -1,5 +1,5 @@
 # Released under the MIT License. See LICENSE for details.
-
+from shop.Shop import generate_passcode, add_player_if_not_exists_in_bank
 
 from serverData import serverdata
 from playersData import pdata
@@ -112,10 +112,43 @@ class checkserver(object):
         self.players = newPlayers
 
 
+# Function to handle daily login and increment tickets
+# def handle_daily_login(pbid):
+#     current_dir = os.path.dirname(os.path.abspath(__file__))
+#     json_file = os.path.join(current_dir, '..','shop', 'bank.json')
+
+#     # Load the bank.json file
+#     if os.path.exists(json_file) and os.path.getsize(json_file) > 0:
+#         with open(json_file, 'r') as f:
+#             try:
+#                 bank_data = json.load(f)
+#             except json.JSONDecodeError as e:
+#                 print(f"Error decoding JSON: {e}")
+#                 bank_data = {}
+#     else:
+#         bank_data = {}
+
+#     # Check if the player exists in the bank
+#     if pbid in bank_data:
+#         # Increment tickets by 50 for daily login
+#         bank_data[pbid]["tickets"] += 50
+#         print(f"{pbid} received 50 tickets for daily login. Total tickets: {bank_data[pbid]['tickets']}")
+#     else:
+#         print(f"{pbid} already received login bonus")
+
+#     # Write the updated bank_data back to bank.json
+#     with open(json_file, 'w') as f:
+#         json.dump(bank_data, f, indent=4)
+
+
 def on_player_join_server(pbid, player_data, ip, device_id):
     global ipjoin
     now = time.time()
     # player_data=pdata.get_info(pbid)
+
+    # Add player to bank.json if they don't exist =============NANI=============
+    add_player_if_not_exists_in_bank(pbid)
+
     clid = 113
     device_string = ""
     for ros in ba.internal.get_game_roster():
@@ -188,6 +221,7 @@ def on_player_join_server(pbid, player_data, ip, device_id):
             verify_account(pbid, player_data)  # checked for spoofed ids
             logger.log(
                 f'{pbid} ip: {serverdata.clients[pbid]["lastIP"]} , Device id: {device_id}')
+            #handle_daily_login(pbid)#to provide 50 tickets as a bonus
             _ba.screenmessage(settings["regularWelcomeMsg"] + " " + device_string,
                               color=(0.60, 0.8, 0.6), transient=True,
                               clients=[clid])
@@ -199,6 +233,7 @@ def on_player_join_server(pbid, player_data, ip, device_id):
             callback=save_age,
             pb_id=pbid,
             display_string=device_string
+
         )
 
         thread.start()
@@ -414,3 +449,4 @@ def on_join_request(ip):
         serverdata.ips[ip] = {"lastRequest": time.time(), "count": count}
     else:
         serverdata.ips[ip] = {"lastRequest": time.time(), "count": 0}
+

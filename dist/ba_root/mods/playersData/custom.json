@@ -5,6 +5,12 @@
         "pb-IF4TVWwZUQ==": "proowner"
     },
     "customeffects": {
-        "pb-IF4TVWwZUQ==": "spark"
+        "pb-IF4TVWwZUQ==": [
+            "spark"
+        ],
+        "pb-IF42P24f": [
+            "spark",
+            "distortion"
+        ]
     }
 }

@@ -1,7 +1,11 @@
 from bastd.actor.playerspaz import *
 import ba
 import bastd
-
+import json #=============NANI============
+from shop.Shop import get_player_effect_from_bank
+import os 
+from datetime import datetime
+import _ba
 import functools
 import random
 from typing import List, Sequence, Optional, Dict, Any
@@ -79,23 +83,46 @@ class NewPlayerSpaz(PlayerSpaz):
             account_id = self._player._sessionplayer.get_v1_account_id()
         except:
             return
+
+        self.effects = []
+
+        # First, check if the player has custom effects
         custom_effects = pdata.get_custom()['customeffects']
 
-        if account_id  in custom_effects:
-            self.effects = [custom_effects[account_id]] if type(custom_effects[account_id]) is str else custom_effects[account_id]
-        else:
-            #  check if we have any effect for his rank.
-            if _settings['enablestats']:
-                stats = mystats.get_cached_stats()
-                if account_id in stats and _settings['enableTop5effects']:
-                    rank = stats[account_id]["rank"]
-                    self.effects = RANK_EFFECT_MAP[rank] if rank in RANK_EFFECT_MAP else []
+        if account_id in custom_effects:
+            custom_effect = custom_effects[account_id]
+            if isinstance(custom_effect, str):
+                self.effects.append(custom_effect)
+            elif isinstance(custom_effect, list):
+                self.effects.extend([effect for effect in custom_effect if isinstance(effect, str)])
 
+        # Check bank.json for additional effects
+        bank_effect = get_player_effect_from_bank(account_id)
+        if bank_effect:
+            if isinstance(bank_effect, list):
+                self.effects.extend([effect for effect in bank_effect if isinstance(effect, str)])
+            elif isinstance(bank_effect, str):
+                self.effects.append(bank_effect)
 
+        # Check if player has rank-based effects
+        if _settings['enablestats']:
+            stats = mystats.get_cached_stats()
+            if account_id in stats and _settings['enableTop5effects']:
+                rank = stats[account_id]["rank"]
+                rank_effect = RANK_EFFECT_MAP.get(rank)
+                if rank_effect:
+                    self.effects.append(rank_effect)
 
+        # Exit early if no effects
         if len(self.effects) == 0:
             return
 
+        print(self.effects)
+
+        # Ensure that all effects are strings before triggering them
+        self.effects = [effect for effect in self.effects if isinstance(effect, str)]
+
+        # Map effect names to effect trigger functions
         self._effect_mappings = {
             "spark": self._add_spark,
             "sparkground": self._add_sparkground,
@@ -116,11 +143,12 @@ class NewPlayerSpaz(PlayerSpaz):
             "noeffect": lambda: None,
         }
 
+        # Trigger the effects
         for effect in self.effects:
-            trigger = self._effect_mappings[effect] if effect in self._effect_mappings else lambda: None
+            trigger = self._effect_mappings.get(effect, lambda: None)
             activity = self._activity()
             if activity:
-                with ba.Context(self._activity()):
+                with ba.Context(activity):
                     trigger()
 
     @effect(repeat_interval=0.1)

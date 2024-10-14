@@ -31,7 +31,7 @@
         "barsBehindName":true
     },
     "autoNightMode":{
-        "enable":true,
+        "enable":false,
         "startTime":"18:30",
         "endTime":"06:00",
         "fireflies":true,
@@ -69,7 +69,7 @@
     },
     "StumbledScoreScreen":true,
     "elPatronPowerups":{
-        "enable":true,
+        "enable":false,
         "settings":{"Powers Gravity": true,
             "Tank Shield PTG": 96,
             "Healing Damage PTG": 72,
@@ -98,7 +98,7 @@
         "webhookURL": "https://discord.com/api/webhooks/82649239/e7s0zyBJIuczXL7_CGSO5WM"
     },
     "afk_remover":{
-        "enable":true,
+        "enable":false,
         "ingame_idle_time_in_secs":60,
         "kick_idle_from_lobby":true,
         "lobby_idle_time_in_secs":10
@@ -127,8 +127,8 @@
     "maxPlayersPerDevice":1,
     "warnMsg":"WARNING !!!",
     "afterWarnKickMsg":"Enough warnings, Goodbye have a nice day :)",
-    "firstTimeJoinMsg":"Welcome to the server,we r saving all your account details and chats",
-    "regularWelcomeMsg":"Welcome Back",
+    "firstTimeJoinMsg": "Welcome to the server! You've received 500\\t tickets as a welcome bonus.",
+    "regularWelcomeMsg": "Welcome back! You've earned 50\\t tickets for daily login.",
     "contributeData": true,
     "enabletags": true,
     "enablehptag": true,

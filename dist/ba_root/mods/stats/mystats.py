@@ -201,6 +201,31 @@ def update(score_set):
     if account_scores:
         UpdateThread(account_kills, account_deaths, account_scores).start()
 
+def update_tickets_in_bank(account_id, tickets_increment): #=================NANI===========================
+    # Get the directory where serverchecker.py is located
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Construct the path to the bank.json file located in the shop folder
+    json_file = os.path.join(current_dir, '..', 'shop', 'bank.json')
+    
+    # Load bank.json
+    if os.path.exists(json_file) and os.path.getsize(json_file) > 0:
+        with open(json_file, 'r') as f:
+            bank = json.load(f)
+    else:
+        bank = {}
+
+    # Update the tickets for the corresponding account ID
+    if account_id in bank:
+        bank[account_id]['tickets'] += tickets_increment
+        print(account_id," earned ", tickets_increment)
+    else:
+        # If account doesn't exist in bank
+        print("Mystats.py -> This Mf doesnt have a bank account")
+
+    # Write updated bank to bank.json
+    with open(json_file, 'w') as f:
+        json.dump(bank, f, indent=4)
 
 class UpdateThread(threading.Thread):
     def __init__(self, account_kills, account_deaths, account_scores):
@@ -225,7 +250,6 @@ class UpdateThread(threading.Thread):
                 # (we only do this when first creating the entry to save time,
                 # though it may be smart to refresh it periodically since
                 # it may change)
-
                 stats[account_id] = {'rank': 0,
                                      'name': "deafult name",
                                      'scores': 0,
@@ -237,7 +261,6 @@ class UpdateThread(threading.Thread):
                                      'avg_score': 0,
                                      'last_seen': str(datetime.datetime.now()),
                                      'aid': str(account_id)}
-
             # Temporary codes to change 'name_html' to 'name'
             # if 'name_html' in stats[account_id]:
             #     stats[account_id].pop('name_html')
@@ -261,6 +284,10 @@ class UpdateThread(threading.Thread):
             # also incrementing the games played and adding the id
             stats[account_id]['games'] += 1
             stats[account_id]['aid'] = str(account_id)
+            # Increment tickets: 5 tickets for each kill =================================NANI=============================
+            # Update tickets in bank.json for the corresponding account ID
+            update_tickets_in_bank(account_id, kill_count * 5)
+
         # dump our stats back to disk
         tempppp = None
         from datetime import datetime
