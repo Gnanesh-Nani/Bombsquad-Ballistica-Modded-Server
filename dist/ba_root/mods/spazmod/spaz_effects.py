@@ -117,7 +117,7 @@ class NewPlayerSpaz(PlayerSpaz):
         if len(self.effects) == 0:
             return
 
-        print(self.effects)
+        #print(self.effects)
 
         # Ensure that all effects are strings before triggering them
         self.effects = [effect for effect in self.effects if isinstance(effect, str)]

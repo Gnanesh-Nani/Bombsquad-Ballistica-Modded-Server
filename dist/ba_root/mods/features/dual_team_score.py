@@ -307,13 +307,17 @@ def show_player_scores(self,
     translated = ba.Lstr(translate=('scoreNames', score_label))
 
     _txt(390, 0, translated)
+    _txt(500, 4,"Tickets", maxwidth=100)
+
 
     if is_two_team:
             _txt(-595, 4, ba.Lstr(resource='playerText'),
                  h_align=Text.HAlign.LEFT)
             _txt(-400, 4, ba.Lstr(resource='killsText'))
             _txt(-300, 4, ba.Lstr(resource='deathsText'), maxwidth=100)
-            _txt(-190, 0, translated)
+            _txt(-200, 0, translated)
+            _txt(-100, 4,"Tickets", maxwidth=100)
+
 
     topkillcount = 0
     topkilledcount = 99999
@@ -381,6 +385,8 @@ def show_player_scores(self,
                           playerrec.accum_killed_count == topkilledcount, 0.1, team_id=0)
                 _scoretxt(_get_prec_score_str(playerrec), -190,
                           _get_prec_score(playerrec) == top_score, 0.2, team_id=0)
+                _scoretxt(str(playerrec.accum_kill_count*5)+'\ue01f', -100,
+                          playerrec.accum_kill_count == topkillcount, 0.1, team_id=0)
         else:
                 _scoretxt(str(playerrec.accum_kill_count), 180,
                           playerrec.accum_kill_count == topkillcount, 0.1)
@@ -388,6 +394,8 @@ def show_player_scores(self,
                           playerrec.accum_killed_count == topkilledcount, 0.1)
                 _scoretxt(_get_prec_score_str(playerrec), 390,
                           _get_prec_score(playerrec) == top_score, 0.2)
+                _scoretxt(str(playerrec.accum_kill_count*5)+'\ue01f', 500,
+                          playerrec.accum_kill_count == topkillcount, 0.1)
 
 
 # ======================== draw screen =============

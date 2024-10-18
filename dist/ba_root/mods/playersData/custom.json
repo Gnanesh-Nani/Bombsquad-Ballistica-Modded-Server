@@ -2,15 +2,18 @@
     "customtag": {
         "pb-id": "smoothy",
         "pb-45": "something",
-        "pb-IF4TVWwZUQ==": "proowner"
+        "pb-IF4TVWwZUQ==": "proowner",
+        "pb-IF4zU0MoBw==": "jackisback",
+        "pb-IF48URkhKQ==": "jackisback",
+        "pb-IF4rUmwENA==": "pixe",
+        "pb-IF42P24f": "shit"
     },
     "customeffects": {
         "pb-IF4TVWwZUQ==": [
             "spark"
         ],
         "pb-IF42P24f": [
-            "spark",
-            "distortion"
+            "spark"
         ]
     }
 }

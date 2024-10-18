@@ -6,24 +6,31 @@
   	  "BrodcastCommand": true
     },
     "textonmap": {
-        "top watermark": "Welcome to server \nIP @IP PORT @PORT",
-        "bottom left watermark": "Owner : <owner-name> \nEditor : <bablu>\nScripts : BCS1.7.13",
+        "top watermark": "Welcome to server 💀MR-RIP TEAMS💀 \n Visit our website there you can 🛒 Shop Effects and Tags from our website \n Use /password and /me to see ur Login credentials",
+        "bottom left watermark": "Owner : NANIisOP \nScripts :RIP-SCRIPT extends BCS1.7.13",
         "center highlights":{
             "color":[1,0,0],
             "randomColor":true,
             "msg":[
-                "type end to start end vote",
-                "start msg with prefix .(dot) to send in game popup msg",
-                "start msg with prefix ,(comma) to send msg to teammates",
-                "BombSquad Community Server - BCS"
-                ]
+                "🛒 **Shop Now!** Click the Stats button to buy effects and tags!",
+                "🚀 Exciting News! Visit our webpage via the Stats button!",
+                "🔑 Use the /password command to access your account credentials!",
+                "🎮 Discover new items in the shop—click the Stats button!"
+            ]
         }
     },
     "ScoreScreenAnnouncement":{
         "enable": true,
-        "msg": ["click stats button to join discord", "watch hey smoothy youtube channel","download new mods from discord", "use /ping all to check others ping.",
-    "start msg with prefix ,(comma) to send msg to teammates", "start msg with prefix .(dot) to send in game popup msg","click stats button for leaderboard","get notification when friends join this server, checkout leaderboard",
-"abusers, spammers will get auto ban", "doesnt matter who starts fight, if you abuse- you will get ban too."]
+        "msg": [
+            "📺 Check out my YouTube channel, NANI OP!",
+            "🛒 On the Stats website, you can purchase effects and tags.",
+            "🏆 You'll get 5 tickets per kill, so play aggressively!",
+            "📢 Visit the website to spend your tickets in the shop.",
+            "📊 Click the Stats button for the leaderboard!",
+            "🔔 Get notified when friends join—check the leaderboard!",
+            "🚫 Abusers and spammers will be auto-banned.",
+            "⚠️ No matter who starts a fight, abuse will result in a ban."
+        ]
     },
     "statsResetAfterDays":31,
     "leaderboard":{
@@ -37,9 +44,9 @@
         "fireflies":true,
         "fireflies_random_color":false
     },
-    "colorfullMap":true,
+    "colorfullMap":false,
     "playlists":{
-        "team":12345,
+        "team":486545,
         "ffa":412175,
         "elim":412172,
         "soccer":412160,
@@ -115,7 +122,7 @@
     "sameCharacterForTeam":false,
     "newResultBoard":true,
     "HostDeviceName":"v1.4",
-    "HostName":"BCS",
+    "HostName":"MR-RIP",
     "ShowKickVoteStarterName":true,
     "autoTeamBalance": true,
     "KickVoteMsgType":"chat",
@@ -123,18 +130,18 @@
     "minAgeToJoinInHours":24,
     "maxWarnCount":2,
     "WarnCooldownMinutes":30,
-    "maxAccountPerIP":1,
+    "maxAccountPerIP":3,
     "maxPlayersPerDevice":1,
     "warnMsg":"WARNING !!!",
     "afterWarnKickMsg":"Enough warnings, Goodbye have a nice day :)",
-    "firstTimeJoinMsg": "Welcome to the server! You've received 500\\t tickets as a welcome bonus.",
-    "regularWelcomeMsg": "Welcome back! You've earned 50\\t tickets for daily login.",
+    "firstTimeJoinMsg": "Welcome to the server! You've received 200 tickets as a welcome bonus.",
+    "regularWelcomeMsg": "Welcome back!",
     "contributeData": true,
     "enabletags": true,
     "enablehptag": true,
     "enablerank": true,
     "enablestats": true,
-    "enableHitTexts": true,
+    "enableHitTexts": false,
     "enableeffects": true,
     "enableTop5effects": true,
     "enableTagAnimation":true

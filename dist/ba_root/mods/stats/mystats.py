@@ -11,7 +11,7 @@ import urllib.request
 from ba._activitytypes import *
 
 damage_data = {}
-
+icon = '\ue01f'
 ranks = []
 top3Name = []
 
@@ -201,8 +201,22 @@ def update(score_set):
     if account_scores:
         UpdateThread(account_kills, account_deaths, account_scores).start()
 
+def get_client_id(account_id):
+    for ros in ba.internal.get_game_roster():
+        if ros["account_id"] == account_id:
+            return ros["client_id"]
+    return None
+
+def display_the_tickets_earned(account_id,tickets_increment):
+    cli_id = get_client_id(account_id)
+    #print(cli_id)
+    message = f"You have earned {tickets_increment} tickets {icon} in this match!"
+    _ba.pushcall(lambda: _ba.screenmessage(message, color=(1, 1, 1), transient=True, clients=[cli_id]))
+
 def update_tickets_in_bank(account_id, tickets_increment): #=================NANI===========================
     # Get the directory where serverchecker.py is located
+    #print(f"Calling update_tickets_in_bank for {account_id} with increment {tickets_increment}")
+    ba.pushcall(lambda:display_the_tickets_earned(account_id , tickets_increment),from_other_thread=True)
     current_dir = os.path.dirname(os.path.abspath(__file__))
     
     # Construct the path to the bank.json file located in the shop folder
@@ -214,7 +228,7 @@ def update_tickets_in_bank(account_id, tickets_increment): #=================NAN
             bank = json.load(f)
     else:
         bank = {}
-
+    print('--'*5)
     # Update the tickets for the corresponding account ID
     if account_id in bank:
         bank[account_id]['tickets'] += tickets_increment
@@ -222,7 +236,7 @@ def update_tickets_in_bank(account_id, tickets_increment): #=================NAN
     else:
         # If account doesn't exist in bank
         print("Mystats.py -> This Mf doesnt have a bank account")
-
+    print('--'*5)
     # Write updated bank to bank.json
     with open(json_file, 'w') as f:
         json.dump(bank, f, indent=4)
@@ -276,7 +290,7 @@ class UpdateThread(threading.Thread):
                     stats[account_id]['name'] = name
 
             # now increment their kills whether they were already there or not
-
+            #print(stats[account_id])
             stats[account_id]['kills'] += kill_count
             stats[account_id]['deaths'] += self.account_deaths[account_id]
             stats[account_id]['scores'] += self.account_scores[account_id]

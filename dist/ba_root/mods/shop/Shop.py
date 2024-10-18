@@ -90,6 +90,3 @@ def add_player_if_not_exists_in_bank(pbid):
             "password": generate_passcode()
         }
         save_bank_data(bank_data)
-        print(f"Player {pbid} added with initial values.")
-    else:
-        print(f"Player {pbid} already exists.")

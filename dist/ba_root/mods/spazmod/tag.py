@@ -9,37 +9,70 @@ from stats import mystats
 from shop.Shop import get_player_tag_from_bank
 sett = setting.get_settings_data()
 
+def normalize_color(color):
+    if isinstance(color, (tuple, list)) and len(color) == 3:
+        return tuple(c / 255.0 for c in color)
+    else:
+        return (1, 1, 1)
 
 def addtag(node, player):
     session_player = player.sessionplayer
     account_id = session_player.get_v1_account_id()
 
-    # Get custom tags
     customtag_ = pdata.get_custom()
     customtag = customtag_['customtag']
 
-    # Get roles and player roles
     roles = pdata.get_roles()
     p_roles = pdata.get_player_roles(account_id)
 
     tag = None
-    col = (0.5, 0.5, 1)  # Default color for custom tags
+    col = (0.5, 0.5, 1)
 
-    # Check for custom tag
-    if account_id in customtag:
+    buyed_tag, buyed_col = get_player_tag_from_bank(account_id)
+    if buyed_tag and buyed_col:  # Ensure buyed_col is valid
+        buyed_col = normalize_color(buyed_col)
+        tag, col = buyed_tag, buyed_col
+    elif account_id in customtag:
         tag = customtag[account_id]
-
-    if p_roles:
+    elif p_roles:
         for role in roles:
             if role in p_roles:
                 tag = roles[role]['tag']
                 col = roles[role]['tagcolor']
-                
-    # Use the function to check if the player has a tag from bank.json
-    tag, col = get_player_tag_from_bank(account_id)
+                break
+    if tag:
+        Tag(node, tag, col)
+
+
+def addtag(node, player):
+    session_player = player.sessionplayer
+    account_id = session_player.get_v1_account_id()
+
+    customtag_ = pdata.get_custom()
+    customtag = customtag_['customtag']
+
+    roles = pdata.get_roles()
+    p_roles = pdata.get_player_roles(account_id)
+
+    tag = None
+    col = (0.5, 0.5, 1)
+
+    buyed_tag, buyed_col = get_player_tag_from_bank(account_id)
+    buyed_col = normalize_color(buyed_col)
+    if buyed_tag:
+        tag, col = buyed_tag, buyed_col
+    elif account_id in customtag:
+        tag = customtag[account_id]
+    elif p_roles:
+        for role in roles:
+            if role in p_roles:
+                tag = roles[role]['tag']
+                col = roles[role]['tagcolor']
+                break
 
     if tag:
         Tag(node, tag, col)
+
 
 def addrank(node,player):
     session_player=player.sessionplayer
@@ -62,7 +95,6 @@ def addhp(node, spaz):
 class Tag(object):
     def __init__(self,owner=None,tag="somthing",col=(1,1,1)):
         self.node=owner
-
         mnode = ba.newnode('math',
                                owner=self.node,
                                attrs={
@@ -110,7 +142,7 @@ class Tag(object):
                 1.0: (1,1,0),
                 1.2: (0,1,1),
                 1.4: (1,0,1)
-            }, loop=True)
+            } , loop=True)
 class Rank(object):
     def __init__(self,owner=None,rank=99):
         self.node=owner
