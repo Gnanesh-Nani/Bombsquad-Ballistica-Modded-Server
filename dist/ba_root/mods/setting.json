@@ -144,5 +144,8 @@
     "enableHitTexts": false,
     "enableeffects": true,
     "enableTop5effects": true,
-    "enableTagAnimation":true
+    "enableTagAnimation":true,
+    "enable_webserver": true,
+    "webserver_port": 3002,
+    "webserver_host": "0.0.0.0"
 }

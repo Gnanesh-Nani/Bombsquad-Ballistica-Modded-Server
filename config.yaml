@@ -5,7 +5,7 @@
 # Uncomment any of these values to override defaults.
 
 # Name of our server in the public parties list.
-party_name: "💀MR-RIP💀" 
+party_name: "Kaboom" 
 
 # If true, your party will show up in the global public party list
 # Otherwise it will still be joinable via LAN or connecting by IP address.
@@ -94,7 +94,7 @@ ffa_series_length: 24
 # your back-end server can use the following url:
 # http://bombsquadgame.com/accountquery?id=ACCOUNT_ID_HERE
 
-stats_url: http://51.79.248.119:3000/stats?account=${ACCOUNT}
+stats_url: http://localhost:5173/autologin/${ACCOUNT}
 
 # If present, the server subprocess will attempt to gracefully exit after
 # this amount of time. A graceful exit can occur at the end of a series

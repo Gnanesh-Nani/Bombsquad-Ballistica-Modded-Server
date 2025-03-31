@@ -36,6 +36,8 @@ from features import text_on_map, announcement
 from features import map_fun
 from spazmod import modifyspaz
 from tools import notification_manager
+from shop import Shop
+from webserver import webServer
 if TYPE_CHECKING:
     from typing import Optional, Any
 
@@ -161,6 +163,18 @@ def bootstraping():
             healthcheck.main()
         except:
             logging.warning("please install psutil to enable system monitor.")
+
+    print("Loading the Bank Data cache at the start of Server")
+    Shop.load_bank_data_from_disk()
+
+
+    if settings.get("enable_webserver", True):  # Add this to your settings.json
+        try:
+            webServer.start_webserver()
+            print("FastAPI webserver started successfully")
+            logging.info("FastAPI webserver started successfully")
+        except Exception as e:
+            logging.error(f"Failed to start webserver: {e}")
 
     # import features
     if settings["whitelist"]:

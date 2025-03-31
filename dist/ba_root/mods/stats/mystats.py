@@ -6,6 +6,7 @@ import os
 import shutil
 import threading
 import datetime
+from shop import Shop
 
 import urllib.request
 from ba._activitytypes import *
@@ -213,33 +214,16 @@ def display_the_tickets_earned(account_id,tickets_increment):
     message = f"You have earned {tickets_increment} tickets {icon} in this match!"
     _ba.pushcall(lambda: _ba.screenmessage(message, color=(1, 1, 1), transient=True, clients=[cli_id]))
 
-def update_tickets_in_bank(account_id, tickets_increment): #=================NANI===========================
-    # Get the directory where serverchecker.py is located
-    #print(f"Calling update_tickets_in_bank for {account_id} with increment {tickets_increment}")
-    ba.pushcall(lambda:display_the_tickets_earned(account_id , tickets_increment),from_other_thread=True)
-    current_dir = os.path.dirname(os.path.abspath(__file__))
+def update_tickets_in_bank(account_id, tickets_increment):
+    ba.pushcall(lambda: display_the_tickets_earned(account_id, tickets_increment), from_other_thread=True)
     
-    # Construct the path to the bank.json file located in the shop folder
-    json_file = os.path.join(current_dir, '..', 'shop', 'bank.json')
+    # Import shop's update function (circular imports may need handling)
     
-    # Load bank.json
-    if os.path.exists(json_file) and os.path.getsize(json_file) > 0:
-        with open(json_file, 'r') as f:
-            bank = json.load(f)
-    else:
-        bank = {}
-    print('--'*5)
-    # Update the tickets for the corresponding account ID
-    if account_id in bank:
-        bank[account_id]['tickets'] += tickets_increment
-        print(account_id," earned ", tickets_increment)
-    else:
-        # If account doesn't exist in bank
-        print("Mystats.py -> This Mf doesnt have a bank account")
-    print('--'*5)
-    # Write updated bank to bank.json
-    with open(json_file, 'w') as f:
-        json.dump(bank, f, indent=4)
+    # Update the cache directly
+    Shop.update_bank_cache(account_id, {'tickets': tickets_increment})
+    
+    
+    print(f"{account_id} earned {tickets_increment} tickets")
 
 class UpdateThread(threading.Thread):
     def __init__(self, account_kills, account_deaths, account_scores):
@@ -311,6 +295,8 @@ class UpdateThread(threading.Thread):
         update_time = now.strftime("%S:%M:%H - %d %b %y")
         # print(f"Added {str(len(self._account_kills))} account's stats entries. || {str(update_time)}")
         refreshStats()
+            # Optional: Immediately save to disk or let it save later
+        Shop.save_bank_data_to_disk()
 
 
 def getRank(acc_id):

@@ -193,7 +193,7 @@
  ],
  "Default Player Profiles": {
   "Client Input Device #1": "__account__",
-  "Client Input Device #2": "\u0110\u1ee9c $",
+  "Client Input Device #2": "__account__",
   "Client Input Device #3": "__account__",
   "Client Input Device #4": "__account__",
   "Client Input Device #5": "halospin",
@@ -202,16 +202,16 @@
  },
  "Fleet Zone Pings": {
   "prod": {
-   "bangkok": 102.32230101246387,
-   "hong_kong": 83.09635383274872,
-   "hyderabad": 70.19295486109331,
-   "jakarta": 43.886545282788575,
-   "kolkata": 84.84140426502563,
-   "manila": 110.26065394980833,
-   "mumbai": 62.45788204250857,
-   "perth": 135.5961430235766,
-   "singapore": 2.262477388838306,
-   "taipei": 62.33960627275519
+   "bahrain": 277.1262240003125,
+   "bangkok": 91.88097115099663,
+   "delhi": 63.79619106570317,
+   "dubai": 183.4724330001336,
+   "hong_kong": 99.49032792376602,
+   "hyderabad": 50.20820537731197,
+   "jakarta": 82.47992268803137,
+   "kolkata": 77.03544828990562,
+   "mumbai": 50.348472681878775,
+   "singapore": 65.64014173390751
   }
  },
  "Free-for-All Max Players": 25,
@@ -302,37 +302,8 @@
  "Team Game Max Players": 25,
  "Team Tournament Playlist Randomize": true,
  "Team Tournament Playlist Selection": "RIP NANI TEAMS",
- "Team Tournament Playlists": {
-  "My Teams Playlist": [
-   {
-    "settings": {
-     "Balance Total Lives": true,
-     "Epic Mode": false,
-     "Lives Per Player": 6,
-     "Respawn Times": 1.0,
-     "Solo Mode": true,
-     "Time Limit": 0,
-     "map": "Rampage"
-    },
-    "type": "bastd.game.elimination.EliminationGame"
-   }
-  ],
-  "Solo Ramp": [
-   {
-    "settings": {
-     "Balance Total Lives": true,
-     "Epic Mode": false,
-     "Lives Per Player": 10,
-     "Respawn Times": 1.0,
-     "Solo Mode": true,
-     "Time Limit": 0,
-     "map": "Rampage"
-    },
-    "type": "bastd.game.elimination.EliminationGame"
-   }
-  ]
- },
- "launchCount": 362,
+ "Team Tournament Playlists": {},
+ "launchCount": 409,
  "lc14173": 1,
  "lc14292": 1
 }
