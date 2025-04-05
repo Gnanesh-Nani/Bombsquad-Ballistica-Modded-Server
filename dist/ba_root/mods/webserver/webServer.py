@@ -69,24 +69,50 @@ def get_top_players(count: int = 3) -> List[Dict]:
 @app.post("/app/bank/buy")
 async def buy_item(data: Dict[str, Any]):
     """Handle item purchases and update bank data"""
-    print('Buy End Point Hitted')
+    print(f'Buy Endpoint Hit with data: {data}')  # Log incoming data
+    
     try:
-        global _bank_data_cache  # Access the imported global variable
+        global _bank_data_cache
         
         pbId = data.get('pbId')
         itemName = data.get('itemName')
         price = data.get('price')
         days = data.get('days')
         
+        # Validate required fields
         if not all([pbId, itemName, price, days]):
-            raise HTTPException(status_code=400, detail="Missing required fields")
+            error_msg = f"Missing required fields. Received: pbId={pbId}, itemName={itemName}, price={price}, days={days}"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail=error_msg)
         
-        # Ensure cache is loaded
+        # Ensure price is a positive number
+        try:
+            price = int(price)
+            if price <= 0:
+                raise ValueError("Price must be positive")
+        except (ValueError, TypeError) as e:
+            error_msg = f"Invalid price value: {price}. Error: {str(e)}"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail="Price must be a positive integer")
+        
+        # Ensure days is a positive number
+        try:
+            days = int(days)
+            if days <= 0:
+                raise ValueError("Days must be positive")
+        except (ValueError, TypeError) as e:
+            error_msg = f"Invalid days value: {days}. Error: {str(e)}"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail="Days must be a positive integer")
+        
+        # Load cache if not loaded
         if _bank_data_cache is None:
+            print("Loading bank data cache...")
             _bank_data_cache = load_bank_data()
         
         # Initialize account if not exists
         if pbId not in _bank_data_cache:
+            print(f"Initializing new account for {pbId}")
             _bank_data_cache[pbId] = {
                 "tickets": 200,
                 "effect": None,
@@ -94,51 +120,109 @@ async def buy_item(data: Dict[str, Any]):
                 "password": "default"
             }
         
+        # Get current ticket balance (ensure it's an integer)
+        current_tickets = int(_bank_data_cache[pbId].get("tickets", 0))
+        
+        # Check if user has enough tickets
+        if current_tickets < price:
+            error_msg = f"Insufficient tickets. Current: {current_tickets}, Required: {price}"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail="Insufficient tickets")
+        
+        # Calculate new balance (this is where the fix is)
+        new_ticket_balance = current_tickets - price
+        
+        # Calculate expiry date
         expiry_date = (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S")
+        
+        # Prepare update data
         update_data = {
             "effect": [itemName, expiry_date],
-            "tickets": _bank_data_cache[pbId]["tickets"] - int(price)  # Calculate new ticket count
+            "tickets": new_ticket_balance
         }
         
-        update_bank_cache(pbId, update_data)
+        print(f"Updating account {pbId}. Current: {current_tickets}, Deducting: {price}, New Balance: {new_ticket_balance}")
+        
+        # Update cache and save to disk
+        _bank_data_cache[pbId].update(update_data)
         save_bank_data_to_disk()
+        
+        # Log successful purchase
+        print(f"Purchase successful for {pbId}: {itemName} for {price} tickets. New balance: {new_ticket_balance}")
         
         return {
             "success": True,
             "message": f"{itemName} purchased successfully!",
-            "user": _bank_data_cache[pbId]  # Send updated user data
+            "user": _bank_data_cache[pbId]
         }
         
+    except HTTPException:
+        raise  # Re-raise HTTP exceptions
     except Exception as e:
-        print(f"Error in buy endpoint: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        error_msg = f"Error in buy endpoint: {str(e)}"
+        print(error_msg)
+        raise HTTPException(status_code=500, detail=error_msg)
 
 @app.post("/app/bank/buyTag")
 async def buy_tag(data: Dict[str, Any]):
     """Handle tag purchases and update bank data"""
-    print('BuyTag End Point Hitted')
+    print(f'BuyTag Endpoint Hit with data: {data}')  # Detailed logging
+    
     try:
-        global _bank_data_cache  # Access the imported global variable
+        global _bank_data_cache
         
         pbId = data.get('pbId')
         tagName = data.get('tagName')
         price = data.get('price')
         days = data.get('days')
-        color = data.get('color')  # Expecting RGB array [r, g, b] from frontend
+        color = data.get('color')  # Expecting RGB array [r, g, b]
         
+        # Validate required fields
         if not all([pbId, tagName, price, days, color]):
-            raise HTTPException(status_code=400, detail="Missing required fields")
+            error_msg = f"Missing required fields. Received: pbId={pbId}, tagName={tagName}, price={price}, days={days}, color={color}"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail=error_msg)
         
-        # Validate color format (should be [r, g, b] array)
+        # Validate price
+        try:
+            price = int(price)
+            if price <= 0:
+                raise ValueError("Price must be positive")
+        except (ValueError, TypeError) as e:
+            error_msg = f"Invalid price value: {price}. Error: {str(e)}"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail="Price must be a positive integer")
+        
+        # Validate days
+        try:
+            days = int(days)
+            if days <= 0:
+                raise ValueError("Days must be positive")
+        except (ValueError, TypeError) as e:
+            error_msg = f"Invalid days value: {days}. Error: {str(e)}"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail="Days must be a positive integer")
+        
+        # Validate color format
         if not isinstance(color, list) or len(color) != 3:
-            raise HTTPException(status_code=400, detail="Invalid color format")
+            error_msg = f"Invalid color format: {color}. Expected [r,g,b] array"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail="Color must be RGB array [r,g,b]")
         
-        # Ensure cache is loaded
+        # Validate color values (0-255)
+        if not all(isinstance(c, int) and 0 <= c <= 255 for c in color):
+            error_msg = f"Invalid color values: {color}. Values must be 0-255"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail="Color values must be integers 0-255")
+        
+        # Load cache if not loaded
         if _bank_data_cache is None:
+            print("Loading bank data cache...")
             _bank_data_cache = load_bank_data()
-            
+        
         # Initialize account if not exists
         if pbId not in _bank_data_cache:
+            print(f"Initializing new account for {pbId}")
             _bank_data_cache[pbId] = {
                 "tickets": 200,
                 "effect": None,
@@ -146,28 +230,45 @@ async def buy_tag(data: Dict[str, Any]):
                 "password": "default"
             }
         
-        # Calculate expiry date
+        # Get current tickets (with type conversion)
+        current_tickets = int(_bank_data_cache[pbId].get("tickets", 0))
+        
+        # Check sufficient tickets
+        if current_tickets < price:
+            error_msg = f"Insufficient tickets. Current: {current_tickets}, Required: {price}"
+            print(error_msg)
+            raise HTTPException(status_code=400, detail="Insufficient tickets")
+        
+        # Calculate new balance
+        new_ticket_balance = current_tickets - price
         expiry_date = (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S")
         
-        # Prepare update data with calculated ticket count
+        # Prepare update
         update_data = {
-            "tag": [tagName, expiry_date, color],  # Store the RGB array directly
-            "tickets": _bank_data_cache[pbId]["tickets"] - int(price)  # Calculate new ticket count
+            "tag": [tagName, expiry_date, color],
+            "tickets": new_ticket_balance
         }
         
-        # Update bank data
-        update_bank_cache(pbId, update_data)
-        save_bank_data_to_disk()  # Persist changes
+        print(f"Updating {pbId}. Tickets: {current_tickets} → {new_ticket_balance} (-{price})")
+        
+        # Apply update
+        _bank_data_cache[pbId].update(update_data)
+        save_bank_data_to_disk()
+        
+        print(f"Tag purchase successful: {tagName} for {pbId}")
         
         return {
             "success": True,
-            "message": f"{tagName} purchased successfully!",
-            "user": _bank_data_cache[pbId]  # Send updated user data
+            "message": f"{tagName} tag purchased successfully!",
+            "user": _bank_data_cache[pbId]
         }
         
+    except HTTPException:
+        raise  # Re-raise HTTP exceptions
     except Exception as e:
-        print(f"Error in buyTag endpoint: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        error_msg = f"Error in buyTag endpoint: {str(e)}"
+        print(error_msg)
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.post("/app/bank/removeEffect")
 async def remove_effect(data: Dict[str, Any]):

@@ -192,8 +192,8 @@
   "TEAM B"
  ],
  "Default Player Profiles": {
-  "Client Input Device #1": "Huevo Duro",
-  "Client Input Device #2": "darpan\ud83d\udd95\ud83d\udc96",
+  "Client Input Device #1": "__account__",
+  "Client Input Device #2": "__account__",
   "Client Input Device #3": "__account__",
   "Client Input Device #4": "__account__",
   "Client Input Device #5": "halospin",
@@ -202,16 +202,16 @@
  },
  "Fleet Zone Pings": {
   "prod": {
-   "bahrain": 322.0687409999954,
-   "bangkok": 92.40982594600183,
-   "delhi": 99.82172624400462,
-   "dubai": 235.25815700000408,
-   "hong_kong": 113.62614399999416,
-   "hyderabad": 64.42105200000015,
-   "jakarta": 169.04275199999574,
-   "kolkata": 123.38530200000264,
-   "mumbai": 75.20071980399402,
-   "singapore": 111.4465042039977
+   "bahrain": 278.6060670000552,
+   "bangkok": 127.69213999990825,
+   "delhi": 111.45816900011596,
+   "dubai": 182.78639699997257,
+   "hong_kong": 105.8955450000667,
+   "hyderabad": 49.264278000009654,
+   "jakarta": 80.19697063212334,
+   "kolkata": 85.27487700007441,
+   "mumbai": 64.65874065803973,
+   "singapore": 84.34919300020738
   }
  },
  "Free-for-All Max Players": 25,
@@ -470,7 +470,7 @@
    }
   ]
  },
- "launchCount": 434,
+ "launchCount": 441,
  "lc14173": 1,
  "lc14292": 1
 }
