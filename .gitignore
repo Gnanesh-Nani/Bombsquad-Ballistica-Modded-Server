@@ -6,3 +6,7 @@ dist/ba_root/mods/playerdata/*.json*
 dist/ba_root/mods/serverdata/*.log
 dist/ba_root/mods/serverdata/*.log*
 dist/ba_root/mods/serverdata/*.json
+
+# Firebase Admin SDK Key
+serviceAccountKey.json
+

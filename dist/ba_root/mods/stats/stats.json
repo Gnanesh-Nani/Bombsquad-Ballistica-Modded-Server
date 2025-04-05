@@ -1,9 +1,9 @@
 {
-    "startDate": "31-03-2025",
+    "startDate": "05-04-2025",
     "stats": {
         "pb-IF4VAk4a": {
-            "rank": 6,
-            "name": "pb-IF4VAk4a",
+            "rank": 1,
+            "name": "A DEFAULT GUY",
             "scores": 0,
             "total_damage": 0.0,
             "kills": 0,
@@ -13,71 +13,6 @@
             "avg_score": 0.0,
             "aid": "pb-IF4VAk4a",
             "last_seen": "2022-04-26 17:01:13.715014"
-        },
-        "pb-IF4UUXEsAA==": {
-            "rank": 3,
-            "name": "Linux68595",
-            "scores": 110,
-            "total_damage": 0.0,
-            "kills": 12,
-            "deaths": 79,
-            "games": 30,
-            "kd": 0.151,
-            "avg_score": 3.666,
-            "last_seen": "2025-04-01 07:24:21.305718",
-            "aid": "pb-IF4UUXEsAA=="
-        },
-        "pb-IF4XUWUBVg==": {
-            "rank": 4,
-            "name": "TRUMPㅤ",
-            "scores": 70,
-            "total_damage": 0.0,
-            "kills": 8,
-            "deaths": 6,
-            "games": 2,
-            "kd": 1.333,
-            "avg_score": 35.0,
-            "last_seen": "2025-03-31 20:06:01.653038",
-            "aid": "pb-IF4XUWUBVg=="
-        },
-        "pb-IF42P24f": {
-            "rank": 1,
-            "name": "꧁RIP~NANI꧂",
-            "scores": 547,
-            "total_damage": 0.0,
-            "kills": 44,
-            "deaths": 12,
-            "games": 31,
-            "kd": 3.666,
-            "avg_score": 17.645,
-            "last_seen": "2025-04-01 08:53:15.619074",
-            "aid": "pb-IF42P24f"
-        },
-        "pb-IF4hUUMqCA==": {
-            "rank": 2,
-            "name": "Aasiya",
-            "scores": 321,
-            "total_damage": 0.0,
-            "kills": 19,
-            "deaths": 2,
-            "games": 4,
-            "kd": 9.5,
-            "avg_score": 80.25,
-            "last_seen": "2025-03-31 23:30:18.036682",
-            "aid": "pb-IF4hUUMqCA=="
-        },
-        "pb-IF5SDUob": {
-            "rank": 5,
-            "name": "Wohaib",
-            "scores": 110,
-            "total_damage": 0.0,
-            "kills": 2,
-            "deaths": 1,
-            "games": 1,
-            "kd": 2.0,
-            "avg_score": 110.0,
-            "last_seen": "2025-03-31 23:24:50.891529",
-            "aid": "pb-IF5SDUob"
         }
     }
 }

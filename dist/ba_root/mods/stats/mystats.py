@@ -6,6 +6,7 @@ import os
 import shutil
 import threading
 import datetime
+from typing import List, Dict  # Add this import at the top
 from shop import Shop
 
 import urllib.request
@@ -20,11 +21,13 @@ our_settings = setting.get_settings_data()
 
 base_path = os.path.join(_ba.env()['python_directory_user'], "stats" + os.sep)
 statsfile = base_path + 'stats.json'
+FIREBASE_KEY_PATH = os.path.join(base_path, "serviceAccountKey.json")
+
 cached_stats = {}
 statsDefault = {
     "pb-IF4VAk4a": {
         "rank": 65,
-        "name": "pb-IF4VAk4a",
+        "name": "A DEFAULT GUY",
         "scores": 0,
         "total_damage": 0.0,
         "kills": 0,
@@ -56,16 +59,98 @@ def get_all_stats():
                     jsonData["startDate"], "%d-%m-%Y")
                 _ba.season_ends_in_days = our_settings["statsResetAfterDays"] - (
                     datetime.datetime.now() - seasonStartDate).days
+                
+                # Check if season needs to reset
                 if (datetime.datetime.now() - seasonStartDate).days >= our_settings["statsResetAfterDays"]:
+                    # Create a copy of current stats with end date for history
+                    end_date = datetime.datetime.now().strftime("%d-%m-%Y")
+                    history_stats = {
+                        "startDate": jsonData["startDate"],
+                        "endDate": end_date,
+                        "stats": stats,
+                        "top_players": get_top_players(3)  # Add top 3 players
+                    }
+                    
+                    # Save to local history file
+                    save_to_history(history_stats)
+                    
+                    # Push to Firebase
+                    try:
+                        import firebase_admin
+                        from firebase_admin import firestore
+                        
+                        # Initialize Firebase if not already done
+                        if not firebase_admin._apps:
+                            cred = firebase_admin.credentials.Certificate(FIREBASE_KEY_PATH)
+                            firebase_admin.initialize_app(cred)
+                        
+                        db = firestore.client()
+                        
+                        # Format document ID (convert start date from "dd-mm-yyyy" to "dd_mm_yyyy")
+                        doc_id = jsonData["startDate"].replace("-", "_")
+                        
+                        # Add document to halloffame collection
+                        db.collection("halloffame").document(doc_id).set(history_stats)
+                        print(f"Successfully added season stats to Firebase with ID: {doc_id}")
+                    except Exception as e:
+                        print(f"Error pushing to Firebase: {e}")
+                    
+                    # Reset current season
                     backupStatsFile()
                     seasonStartDate = datetime.datetime.now()
                     return statsDefault
+                
+                # For current season, don't include end date
                 return stats
             except OSError as e:
                 print(e)
                 return jsonData
     else:
         return {}
+
+def get_top_players(count: int = 3) -> List[Dict]:
+    """Get top players by score from current stats"""
+    stats = get_cached_stats()  # You'll need to implement this or use existing stats
+    sorted_entries = sorted(
+        stats.values(),
+        key=lambda x: x['scores'],
+        reverse=True
+    )[:count]
+    
+    # Format the top players data
+    top_players = []
+    for i, entry in enumerate(sorted_entries, 1):
+        top_players.append({
+            "name": entry.get("name", "Unknown"),
+            "rank": i,
+            "avg_score": entry.get("scores", 0) / max(1, entry.get("games", 1)),
+            "games": entry.get("games", 0),
+            "last_seen": entry.get("last_seen", "")
+        })
+    
+    return top_players
+
+def save_to_history(history_data):
+    """Saves season data to history file with start and end dates"""
+    history_file = os.path.join(os.path.dirname(statsfile), "season_history.json")
+    
+    # Load existing history if it exists
+    history = []
+    if os.path.exists(history_file):
+        with open(history_file, 'r', encoding='utf8') as f:
+            try:
+                history = json.load(f)
+                if not isinstance(history, list):
+                    history = []  # Reset if corrupted
+            except:
+                history = []
+    
+    # Add new season data to history
+    history.append(history_data)
+    
+    # Save updated history
+    with open(history_file, 'w', encoding='utf8') as f:
+        json.dump(history, f, indent=2)
 
 
 def backupStatsFile():

@@ -32,7 +32,7 @@
             "⚠️ No matter who starts a fight, abuse will result in a ban."
         ]
     },
-    "statsResetAfterDays":31,
+    "statsResetAfterDays":3,
     "leaderboard":{
         "enable":true,
         "barsBehindName":true
