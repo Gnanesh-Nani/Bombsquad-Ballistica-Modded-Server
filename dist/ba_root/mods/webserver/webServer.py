@@ -7,7 +7,9 @@ from typing import Dict, Any, List
 import re
 import os
 import json
+import setting
 
+our_settings = setting.get_settings_data()
 # Import from your existing modules
 from shop.Shop import (
     load_bank_data,
@@ -354,7 +356,7 @@ async def get_bank():
 
 def run_webserver():
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=3002)
+    uvicorn.run(app, host=our_settings['fastAPI_webserver_host'], port=our_settings['fastAPI_webserver_port'])
 
 def start_webserver():
     """Start in background thread"""

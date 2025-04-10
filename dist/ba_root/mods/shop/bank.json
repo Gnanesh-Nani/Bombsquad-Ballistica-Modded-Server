@@ -1,12 +1,12 @@
 {
     "pb-IF4UUXEsAA==": {
-        "tickets": 22200,
+        "tickets": 22100,
         "effect": null,
         "tag": null,
         "password": "1234"
     },
     "pb-IF42P24f": {
-        "tickets": 840,
+        "tickets": 850,
         "effect": null,
         "tag": [
             "dfasdfsdaf",
@@ -290,20 +290,9 @@
         "password": "PWJvDCqk"
     },
     "pb-IF4iU3kAKw==": {
-        "tickets": 0,
-        "effect": [
-            "glow",
-            "2024-10-15 23:01:33"
-        ],
-        "tag": [
-            "BUNDA",
-            "2024-10-15 23:01:06",
-            [
-                0,
-                255,
-                0
-            ]
-        ],
+        "tickets": 30,
+        "effect": null,
+        "tag": null,
         "password": "1pOEXdBB"
     },
     "pb-IF4mUWwoEg==": {
@@ -2891,5 +2880,65 @@
         "effect": null,
         "tag": null,
         "password": "MoLkpCaW"
+    },
+    "pb-IF4MUnE7Mw==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "AUuN22SR"
+    },
+    "pb-IF4HUUpYEg==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "NLExCV3S"
+    },
+    "pb-IF4pUUkbLg==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "x9NUnJZx"
+    },
+    "pb-IF4VVG8pUg==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "2qSMX2YV"
+    },
+    "pb-IF4lUUssCQ==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "4X1zejla"
+    },
+    "pb-IF4jUHozCw==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "aLzVCpnO"
+    },
+    "pb-IF4jUFMPMQ==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "7pcazdmX"
+    },
+    "pb-IF5VUUcOAA==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "gpbPtZ6l"
+    },
+    "pb-IF4mUUlTHQ==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "dFGA512C"
+    },
+    "pb-IF4MUWUoPQ==": {
+        "tickets": 200,
+        "effect": null,
+        "tag": null,
+        "password": "W0Q8i3CL"
     }
 }

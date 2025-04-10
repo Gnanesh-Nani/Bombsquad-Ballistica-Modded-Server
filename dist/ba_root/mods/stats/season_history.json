@@ -214,5 +214,110 @@
       }
     },
     "top_players": []
+  },
+  {
+    "startDate": "05-04-2025",
+    "endDate": "10-04-2025",
+    "stats": {
+      "pb-IF4VAk4a": {
+        "rank": 3,
+        "name": "A DEFAULT GUY",
+        "scores": 0,
+        "total_damage": 0.0,
+        "kills": 0,
+        "deaths": 0,
+        "games": 18,
+        "kd": 0.0,
+        "avg_score": 0.0,
+        "aid": "pb-IF4VAk4a",
+        "last_seen": "2022-04-26 17:01:13.715014"
+      },
+      "pb-IF4UUXEsAA==": {
+        "rank": 2,
+        "name": "\ue030Linux68595",
+        "scores": 10,
+        "total_damage": 0.0,
+        "kills": 1,
+        "deaths": 8,
+        "games": 9,
+        "kd": 0.125,
+        "avg_score": 1.111,
+        "last_seen": "2025-04-06 01:58:53.640384",
+        "aid": "pb-IF4UUXEsAA=="
+      },
+      "pb-IF42P24f": {
+        "rank": 1,
+        "name": "\ue043\ua9c1RIP~NANI\ua9c2",
+        "scores": 80,
+        "total_damage": 0.0,
+        "kills": 8,
+        "deaths": 1,
+        "games": 17,
+        "kd": 8.0,
+        "avg_score": 4.705,
+        "last_seen": "2025-04-06 01:58:54.529371",
+        "aid": "pb-IF42P24f"
+      }
+    },
+    "top_players": []
+  },
+  {
+    "startDate": "10-02-2025",
+    "endDate": "10-04-2025",
+    "stats": {
+      "pb-IF4VAk4a": {
+        "rank": 4,
+        "name": "A DEFAULT GUY",
+        "scores": 0,
+        "total_damage": 0.0,
+        "kills": 0,
+        "deaths": 0,
+        "games": 18,
+        "kd": 0.0,
+        "avg_score": 0.0,
+        "aid": "pb-IF4VAk4a",
+        "last_seen": "2022-04-26 17:01:13.715014"
+      },
+      "pb-IF42P24f": {
+        "rank": 3,
+        "name": "\ue043\ua9c1RIP~NANI\ua9c2",
+        "scores": 281,
+        "total_damage": 0.0,
+        "kills": 1,
+        "deaths": 21,
+        "games": 9,
+        "kd": 0.047,
+        "avg_score": 31.222,
+        "last_seen": "2025-04-10 17:19:19.535710",
+        "aid": "pb-IF42P24f"
+      },
+      "pb-IF4UUXEsAA==": {
+        "rank": 1,
+        "name": "\ue030Linux68595",
+        "scores": 291,
+        "total_damage": 0.0,
+        "kills": 20,
+        "deaths": 21,
+        "games": 6,
+        "kd": 0.952,
+        "avg_score": 48.5,
+        "last_seen": "2025-04-10 22:45:30.172182",
+        "aid": "pb-IF4UUXEsAA=="
+      },
+      "pb-IF4iU3kAKw==": {
+        "rank": 2,
+        "name": "\ue063Fearles511",
+        "scores": 55,
+        "total_damage": 0.0,
+        "kills": 6,
+        "deaths": 1,
+        "games": 1,
+        "kd": 6.0,
+        "avg_score": 55.0,
+        "last_seen": "2025-04-10 22:45:30.753900",
+        "aid": "pb-IF4iU3kAKw=="
+      }
+    },
+    "top_players": []
   }
 ]

@@ -310,6 +310,48 @@ def update_tickets_in_bank(account_id, tickets_increment):
     
     print(f"{account_id} earned {tickets_increment} tickets")
 
+def update_stats_cache_in_backend():
+    global seasonStartDate
+    """Send cached stats to the backend server"""
+    try:
+        import requests
+        stats_data = get_cached_stats()
+        
+        if not stats_data:
+            print("Warning: No stats data available to send")
+            return
+
+        url = our_settings['backendURLtoCacheStats']
+        headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+        json_data = {
+            "data": {
+                "startDate":seasonStartDate.strftime("%d-%m-%Y") if seasonStartDate else None,
+                "stats": stats_data,
+            }
+        }
+
+        print(f"Sending to {url} with data: {json.dumps(json_data, indent=2)}")  # Debug
+        
+        response = requests.post(
+            url,
+            json=json_data,
+            headers=headers,
+            timeout=5
+        )
+        
+        response.raise_for_status()
+        print(f"Success! Status: {response.status_code}, Response: {response.text}")
+        
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed: {str(e)}")
+        if hasattr(e, 'response') and e.response:
+            print(f"Response content: {e.response.text}")
+    except Exception as e:
+        print(f"Unexpected error: {str(e)}")
+
 class UpdateThread(threading.Thread):
     def __init__(self, account_kills, account_deaths, account_scores):
         threading.Thread.__init__(self)
@@ -382,6 +424,7 @@ class UpdateThread(threading.Thread):
         refreshStats()
             # Optional: Immediately save to disk or let it save later
         Shop.save_bank_data_to_disk()
+        update_stats_cache_in_backend()
 
 
 def getRank(acc_id):

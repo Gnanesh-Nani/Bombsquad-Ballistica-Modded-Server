@@ -168,7 +168,7 @@ def bootstraping():
     Shop.load_bank_data_from_disk()
 
 
-    if settings.get("enable_webserver", True):  # Add this to your settings.json
+    if settings.get("enable_fastAPI_webserver", True):  # Add this to your settings.json
         try:
             webServer.start_webserver()
             print("FastAPI webserver started successfully")

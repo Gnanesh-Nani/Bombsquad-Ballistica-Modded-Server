@@ -29,6 +29,7 @@ def get_vibrant_color():
 
 class textonmap:
     def __init__(self):
+
         data = setti['textonmap']
         left = data['bottom left watermark']
         top = data['top watermark']
@@ -54,23 +55,9 @@ class textonmap:
         if setti["leaderboard"]["enable"]:
             self.leaderBoard()
 
-        # Set a timer to create the red bar after a certain delay (e.g., 8 seconds)
-        self.timer = ba.timer(8, ba.Call(self.create_red_bar), repeat=False)
-
         # Set a repeating timer for highlights
         self.timer_highlights = ba.timer(8, ba.Call(self.highlights_), repeat=True)
 
-    def create_red_bar(self):
-        red_bar_height = 40
-        red_bar_node = _ba.newnode('image', attrs={
-            'texture': ba.gettexture('bar'),
-            'position': (0, 320 - red_bar_height / 2),
-            'scale': (0, red_bar_height),  # Set scale width to 0 initially
-            'color': (1, 0, 0),
-            'opacity': 0.5,
-        })
-        red_bar_node.scale = (30 * 20, 30)  # Scale the red bar as required
-        return red_bar_node
     
     def highlights_(self):
         if setti["textonmap"]['center highlights']["randomColor"]:
@@ -84,7 +71,7 @@ class textonmap:
             'h_align': 'center',
             'v_attach': 'bottom',
             'scale': 0.8,
-            'position': (0, 626),
+            'position': (0, 100),
             'color': (1,1,1)
         })
 
@@ -106,8 +93,6 @@ class textonmap:
                 new_position = current_position + move_distance
                 node.position = (0, new_position)
 
-        # Schedule the text movement
-        #self.move_timer = ba.timer(0.1, move_text, repeat=True)
 
         # Delete both nodes after 7 seconds
         self.delt = ba.timer(7, lambda: (

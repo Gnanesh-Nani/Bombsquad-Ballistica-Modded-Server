@@ -32,7 +32,7 @@
             "⚠️ No matter who starts a fight, abuse will result in a ban."
         ]
     },
-    "statsResetAfterDays":3,
+    "statsResetAfterDays":31,
     "leaderboard":{
         "enable":true,
         "barsBehindName":true
@@ -145,7 +145,11 @@
     "enableeffects": true,
     "enableTop5effects": true,
     "enableTagAnimation":true,
-    "enable_webserver": true,
-    "webserver_port": 3002,
-    "webserver_host": "0.0.0.0"
+
+
+    "enable_fastAPI_webserver": true,
+    "fastAPI_webserver_port": 3002,
+    "fastAPI_webserver_host": "0.0.0.0",
+
+    "backendURLtoCacheStats":"http://localhost:3001/api/stats/cacheStats"
 }
