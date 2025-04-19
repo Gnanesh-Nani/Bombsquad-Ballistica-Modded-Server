@@ -22,6 +22,7 @@ from stats.mystats import (
     get_cached_stats,
     get_stats_by_id,
     get_sorted_stats,
+    seasonStartDate,
     dump_stats
 )
 
@@ -44,6 +45,7 @@ def format_date(days: int) -> str:
 @app.get("/app/stats")
 async def get_stats():
     """Get all stats data"""
+    #print(get_all_stats())
     return {
         "stats": get_all_stats(),
         "sorted": get_sorted_stats(get_cached_stats()),

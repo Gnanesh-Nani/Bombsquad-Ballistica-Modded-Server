@@ -326,9 +326,12 @@ def update_stats_cache_in_backend():
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
+
         json_data = {
             "data": {
                 "startDate":seasonStartDate.strftime("%d-%m-%Y") if seasonStartDate else None,
+                "endDate": (seasonStartDate+ datetime.timedelta(days=our_settings["statsResetAfterDays"])).strftime("%d-%m-%Y") if seasonStartDate else None,
+                "seasonDuration": our_settings["statsResetAfterDays"],
                 "stats": stats_data,
             }
         }

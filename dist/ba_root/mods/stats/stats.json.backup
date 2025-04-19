@@ -1,8 +1,8 @@
 {
-    "startDate": "10-02-2025",
+    "startDate": "10-04-2025",
     "stats": {
         "pb-IF4VAk4a": {
-            "rank": 4,
+            "rank": 3,
             "name": "A DEFAULT GUY",
             "scores": 0,
             "total_damage": 0.0,
@@ -14,44 +14,44 @@
             "aid": "pb-IF4VAk4a",
             "last_seen": "2022-04-26 17:01:13.715014"
         },
-        "pb-IF42P24f": {
-            "rank": 3,
-            "name": "꧁RIP~NANI꧂",
-            "scores": 281,
-            "total_damage": 0.0,
-            "kills": 1,
-            "deaths": 21,
-            "games": 9,
-            "kd": 0.047,
-            "avg_score": 31.222,
-            "last_seen": "2025-04-10 17:19:19.535710",
-            "aid": "pb-IF42P24f"
-        },
         "pb-IF4UUXEsAA==": {
-            "rank": 1,
+            "rank": 4,
             "name": "Linux68595",
-            "scores": 291,
+            "scores": 146,
             "total_damage": 0.0,
-            "kills": 20,
-            "deaths": 21,
-            "games": 6,
-            "kd": 0.952,
-            "avg_score": 48.5,
-            "last_seen": "2025-04-10 22:45:30.172182",
+            "kills": 0,
+            "deaths": 13,
+            "games": 12,
+            "kd": 0.0,
+            "avg_score": 12.166,
+            "last_seen": "2025-04-19 20:18:46.385685",
             "aid": "pb-IF4UUXEsAA=="
         },
-        "pb-IF4iU3kAKw==": {
-            "rank": 2,
-            "name": "Fearles511",
-            "scores": 55,
+        "pb-IF4cUW4BDw==": {
+            "rank": 1,
+            "name": "DeepMonst3",
+            "scores": 20,
             "total_damage": 0.0,
-            "kills": 6,
-            "deaths": 1,
-            "games": 1,
-            "kd": 6.0,
-            "avg_score": 55.0,
-            "last_seen": "2025-04-10 22:45:30.753900",
-            "aid": "pb-IF4iU3kAKw=="
+            "kills": 2,
+            "deaths": 2,
+            "games": 3,
+            "kd": 1.0,
+            "avg_score": 6.666,
+            "last_seen": "2025-04-19 20:06:49.069289",
+            "aid": "pb-IF4cUW4BDw=="
+        },
+        "pb-IF42P24f": {
+            "rank": 2,
+            "name": "꧁RIP~NANI꧂",
+            "scores": 20,
+            "total_damage": 0.0,
+            "kills": 2,
+            "deaths": 2,
+            "games": 13,
+            "kd": 1.0,
+            "avg_score": 1.538,
+            "last_seen": "2025-04-19 20:06:47.200035",
+            "aid": "pb-IF42P24f"
         }
     }
 }
