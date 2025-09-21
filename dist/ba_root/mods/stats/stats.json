@@ -1,8 +1,8 @@
 {
-    "startDate": "10-04-2025",
+    "startDate": "21-09-2025",
     "stats": {
         "pb-IF4VAk4a": {
-            "rank": 3,
+            "rank": 1,
             "name": "A DEFAULT GUY",
             "scores": 0,
             "total_damage": 0.0,
@@ -14,43 +14,17 @@
             "aid": "pb-IF4VAk4a",
             "last_seen": "2022-04-26 17:01:13.715014"
         },
-        "pb-IF4UUXEsAA==": {
-            "rank": 4,
-            "name": "Linux68595",
-            "scores": 146,
-            "total_damage": 0.0,
-            "kills": 0,
-            "deaths": 13,
-            "games": 12,
-            "kd": 0.0,
-            "avg_score": 12.166,
-            "last_seen": "2025-04-19 20:18:46.385685",
-            "aid": "pb-IF4UUXEsAA=="
-        },
-        "pb-IF4cUW4BDw==": {
-            "rank": 1,
-            "name": "DeepMonst3",
-            "scores": 20,
-            "total_damage": 0.0,
-            "kills": 2,
-            "deaths": 2,
-            "games": 3,
-            "kd": 1.0,
-            "avg_score": 6.666,
-            "last_seen": "2025-04-19 20:06:49.069289",
-            "aid": "pb-IF4cUW4BDw=="
-        },
         "pb-IF42P24f": {
             "rank": 2,
             "name": "꧁RIP~NANI꧂",
-            "scores": 20,
+            "scores": 96,
             "total_damage": 0.0,
-            "kills": 2,
-            "deaths": 2,
-            "games": 13,
-            "kd": 1.0,
-            "avg_score": 1.538,
-            "last_seen": "2025-04-19 20:06:47.200035",
+            "kills": 0,
+            "deaths": 4,
+            "games": 2,
+            "kd": 0.0,
+            "avg_score": 48.0,
+            "last_seen": "2025-09-21 14:46:06.087118",
             "aid": "pb-IF42P24f"
         }
     }
